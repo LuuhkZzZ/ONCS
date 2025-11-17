@@ -1,0 +1,21 @@
+/* styles.css - simples e limpo */
+body { margin:0; font-family:Arial, Helvetica, sans-serif; background:#f7f9fb; }
+.container { display:flex; min-height:100vh; }
+aside { width:260px; background:#1f2937; color:#fff; padding:18px; box-shadow:2px 0 6px rgba(0,0,0,.08); }
+aside h2 { margin:0 0 14px; font-size:18px; }
+aside button { width:100%; margin-bottom:8px; padding:10px; border:none; border-radius:6px; background:#334155; color:#fff; cursor:pointer; }
+.upload-block { margin-top:10px; font-size:14px; color:#cbd5e1; }
+.upload-block input[type=file] { width:100%; margin-bottom:8px; }
+main { flex:1; padding:20px; }
+section { display:none; }
+section.ativo{ display:block; }
+table { width:100%; border-collapse:collapse; background:#fff; margin-top:12px; box-shadow:0 1px 2px rgba(0,0,0,.04); }
+table th, table td { padding:8px 10px; border-bottom:1px solid #eef2f7; font-size:13px; }
+.modal { position:fixed; left:0; right:0; top:0; bottom:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.4); }
+.modal.hidden { display:none; }
+.modal-content { width:520px; background:#fff; padding:18px; border-radius:8px; }
+.modal-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:10px; }
+.modal-actions button { padding:8px 12px; border-radius:6px; border: none; cursor:pointer; }
+.muted { color:#94a3b8; font-size:13px; margin-top:8px; }
+input, textarea, select, button { font-family:inherit; }
+form input, form textarea { padding:8px; border-radius:6px; border:1px solid #e6edf3; width:100%; box-sizing:border-box; margin-bottom:8px; }
