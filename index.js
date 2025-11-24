@@ -3,11 +3,11 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
-const routes = require("./routes"); // vamos criar já já
+const routes = require("./routes");
 const app = express();
 const PORT = 3000;
 
-// Middleware: para interpretar JSON e permitir acesso do front-end
+// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -20,4 +20,5 @@ app.use("/", express.static(path.join(__dirname, "..", "client")));
 // Iniciar o servidor
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
+  console.log(`📱 Acesse: http://localhost:${PORT}`);
 });
