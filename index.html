@@ -3,116 +3,380 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sistema Corretora — Painel</title>
+  <title>Sistema Corretora — Painel de Controle</title>
   <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <aside>
-      <h2>📋 Corretora</h2>
-      <nav>
-        <button id="btn-renovacoes">Renovações</button>
-        <button id="btn-novos">Novos</button>
-        <button id="btn-parcelas">Parcelas</button>
-        <hr />
-        <div class="upload-block">
-          <h4>Importar planilhas</h4>
-          <form id="form-upload-ren" enctype="multipart/form-data">
-            <input type="file" name="file" accept=".xlsx" />
-            <button type="submit">Importar Renovações</button>
-          </form>
-          <form id="form-upload-novos" enctype="multipart/form-data">
-            <input type="file" name="file" accept=".xlsx" />
-            <button type="submit">Importar Novos</button>
-          </form>
-          <form id="form-upload-parcelas" enctype="multipart/form-data">
-            <input type="file" name="file" accept=".xlsx" />
-            <button type="submit">Importar Parcelas</button>
-          </form>
-          <div id="upload-msg" class="muted"></div>
-        </div>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="#3b82f6"/>
+          <path d="M16 8L22 12V20L16 24L10 20V12L16 8Z" fill="white"/>
+        </svg>
+        <h2>SecureFlow</h2>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" id="btn-dashboard">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+          </svg>
+          Dashboard
+        </button>
+        <button class="nav-item" id="btn-renovacoes">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+          </svg>
+          Renovações
+        </button>
+        <button class="nav-item" id="btn-novos">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+          </svg>
+          Novos Contratos
+        </button>
+        <button class="nav-item" id="btn-parcelas">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+          </svg>
+          Parcelas
+        </button>
+        
+        <div class="nav-divider"></div>
+        
+        <button class="nav-item" id="btn-importar">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+          </svg>
+          Importar Planilhas
+        </button>
+
+        <button class="nav-item" id="btn-exportar">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+          Exportar Dados
+        </button>
       </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="user-details">
+            <p class="user-name">Usuário</p>
+            <p class="user-role">Administrador</p>
+          </div>
+        </div>
+      </div>
     </aside>
 
-    <main>
-      <!-- RENOVAÇÕES -->
-      <section id="sec-renovacoes" class="ativo">
-        <h2>Renovações</h2>
-        <table id="table-renovacoes">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Cliente</th>
-              <th>CPF</th>
-              <th>Vigência Final</th>
-              <th>Status</th>
-              <th>Gestor?</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        <div id="modal-renovacao" class="modal hidden">
-          <div class="modal-content">
-            <h3>Editar Renovação</h3>
-            <form id="form-edit-renovacao">
-              <input type="hidden" name="id" />
-              <label><input type="checkbox" name="gestor_confirmado" /> Gestor confirmado</label>
-              <label>Seguradora (novo acordo)<input name="seguradora_novo" /></label>
-              <label>Comissão (novo acordo)<input name="comissao_novo" type="number" step="0.01" /></label>
-              <label>Prêmio total (novo acordo)<input name="premio_total_novo" type="number" step="0.01" /></label>
-              <label>Forma de pagamento<input name="forma_pagamento" /></label>
-              <label>Quantidade parcelas<input name="parcelas_qtd" type="number" /></label>
-              <label>Vistoria / Rastreador<input name="vistoria" /></label>
-              <label>Observação<textarea name="observacao"></textarea></label>
-              <div class="modal-actions">
-                <button type="button" id="btn-cancel-ren">Cancelar</button>
-                <button type="submit">Salvar</button>
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <header class="header">
+        <div class="header-left">
+          <h1 id="page-title">Dashboard</h1>
+          <p id="page-subtitle">Visão geral do sistema</p>
+        </div>
+        <div class="header-right">
+          <div class="search-box">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+            </svg>
+            <input type="text" placeholder="Buscar..." id="search-input" />
+          </div>
+          <button class="icon-btn">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- DASHBOARD -->
+      <section id="sec-dashboard" class="section active">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon blue">
+              <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <p class="stat-label">Renovações</p>
+              <h3 class="stat-value" id="stat-renovacoes">0</h3>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon green">
+              <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <p class="stat-label">Novos Contratos</p>
+              <h3 class="stat-value" id="stat-novos">0</h3>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon orange">
+              <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <p class="stat-label">Parcelas</p>
+              <h3 class="stat-value" id="stat-parcelas">0</h3>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon purple">
+              <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <p class="stat-label">Últimas Alterações</p>
+              <h3 class="stat-value" id="stat-alteracoes">0</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="card">
+            <h3>Atividade Recente</h3>
+            <div id="atividade-recente" class="activity-list">
+              <p class="empty-state">Nenhuma atividade registrada</p>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Status Geral</h3>
+            <div class="status-list">
+              <div class="status-item">
+                <span class="status-dot green"></span>
+                <span>Sistema operacional</span>
               </div>
-            </form>
+              <div class="status-item">
+                <span class="status-dot green"></span>
+                <span>Banco de dados conectado</span>
+              </div>
+              <div class="status-item">
+                <span class="status-dot green"></span>
+                <span>API funcionando</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RENOVAÇÕES -->
+      <section id="sec-renovacoes" class="section">
+        <div class="card">
+          <div class="filter-bar">
+            <label>
+              Filtrar por mês:
+              <select id="select-mes-renovacoes"></select>
+            </label>
+          </div>
+          <div class="table-wrapper">
+            <table id="table-renovacoes">
+              <thead>
+                <tr>
+                  <th>Vigência Final</th>
+                  <th>Cliente</th>
+                  <th>CPF</th>
+                  <th>Contato</th>
+                  <th>Tipo</th>
+                  <th>Status</th>
+                  <th>Gestor</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
           </div>
         </div>
       </section>
 
       <!-- NOVOS -->
-      <section id="sec-novos">
-        <h2>Novos</h2>
-        <form id="form-novo">
-          <input name="cliente" placeholder="Cliente" required />
-          <input name="data" type="date" />
-          <input name="seguradora" placeholder="Seguradora" />
-          <input name="comissao" type="number" step="0.01" />
-          <input name="premio" type="number" step="0.01" />
-          <input name="tipo" placeholder="Tipo" />
-          <input name="forma_pagamento" placeholder="Forma de pagamento" />
-          <input name="parcelas_qtd" type="number" placeholder="Qtd parcelas" />
-          <input name="vistoria" placeholder="Vistoria / Rastreador" />
-          <textarea name="observacao" placeholder="Observação"></textarea>
-          <button type="submit">Adicionar novo</button>
-        </form>
+      <section id="sec-novos" class="section">
+        <div class="card">
+          <h3>Adicionar Novo Contrato</h3>
+          <form id="form-novo" class="form-grid">
+            <input name="cliente" placeholder="Cliente" required />
+            <input name="data" type="date" placeholder="Data" />
+            <input name="seguradora" placeholder="Seguradora" />
+            <input name="comissao" type="number" step="0.01" placeholder="Comissão (%)" />
+            <input name="premio" type="number" step="0.01" placeholder="Prêmio (R$)" />
+            <input name="tipo" placeholder="Tipo" />
+            <input name="forma_pagamento" placeholder="Forma de Pagamento" />
+            <input name="parcelas_qtd" type="number" placeholder="Qtd. Parcelas" />
+            <input name="vistoria" placeholder="Vistoria/Rastreador" />
+            <textarea name="observacao" placeholder="Observações"></textarea>
+            <button type="submit" class="btn-primary">Adicionar Contrato</button>
+          </form>
+        </div>
 
-        <table id="table-novos">
-          <thead><tr><th>ID</th><th>Cliente</th><th>Seguradora</th><th>Data</th><th>Ações</th></tr></thead>
-          <tbody></tbody>
-        </table>
+        <div class="card">
+          <h3>Contratos Cadastrados</h3>
+          <div class="table-wrapper">
+            <table id="table-novos">
+              <thead>
+                <tr>
+                  <th>Cliente</th>
+                  <th>Seguradora</th>
+                  <th>Data</th>
+                  <th>Prêmio</th>
+                  <th>Comissão</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
       </section>
 
       <!-- PARCELAS -->
-      <section id="sec-parcelas">
-        <h2>Parcelas</h2>
-        <label>Filtrar por data (referência): 
-          <select id="select-referencia"></select>
-        </label>
-        <table id="table-parcelas">
-          <thead>
-            <tr><th>ID</th><th>Cliente</th><th>Apolice</th><th>Parcela</th><th>Data</th><th>Total</th><th>Seguradora</th><th>Pagamento</th><th>Status</th><th>Data Limite</th><th>Ações</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+      <section id="sec-parcelas" class="section">
+        <div class="card">
+          <div class="filter-bar">
+            <label>
+              Filtrar por data:
+              <input type="date" id="select-data-parcelas" />
+            </label>
+          </div>
+          <div class="table-wrapper">
+            <table id="table-parcelas">
+              <thead>
+                <tr>
+                  <th>Cliente</th>
+                  <th>Apólice</th>
+                  <th>Parcela</th>
+                  <th>Data</th>
+                  <th>Total</th>
+                  <th>Seguradora</th>
+                  <th>Pagamento</th>
+                  <th>Status</th>
+                  <th>Data Limite</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
       </section>
-    </main>
-  </div>
 
-  <script src="app.js"></script>
-</body>
-</html>
+      <!-- IMPORTAR -->
+      <section id="sec-importar" class="section">
+        <div class="import-grid">
+          <div class="import-card">
+            <div class="import-icon blue">
+              <svg width="48" height="48" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <h3>Importar Renovações</h3>
+            <p>Faça upload da planilha de renovações (.xlsx)</p>
+            <form id="form-upload-ren" class="upload-form-card">
+              <input type="file" name="file" accept=".xlsx" id="file-ren" hidden />
+              <button type="button" class="btn-upload" onclick="document.getElementById('file-ren').click()">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Selecionar Arquivo
+              </button>
+              <p class="file-name" id="file-name-ren"></p>
+            </form>
+          </div>
+
+          <div class="import-card">
+            <div class="import-icon orange">
+              <svg width="48" height="48" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <h3>Importar Parcelas</h3>
+            <p>Faça upload da planilha de parcelas (.xlsx)</p>
+            <form id="form-upload-parcelas" class="upload-form-card">
+              <input type="file" name="file" accept=".xlsx" id="file-parcelas" hidden />
+              <button type="button" class="btn-upload" onclick="document.getElementById('file-parcelas').click()">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Selecionar Arquivo
+              </button>
+              <p class="file-name" id="file-name-parcelas"></p>
+            </form>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Status da Importação</h3>
+          <div id="import-status" class="import-status">
+            <p class="empty-state">Aguardando upload de arquivos...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPORTAR -->
+      <section id="sec-exportar" class="section">
+        <div class="export-grid">
+          <div class="export-card">
+            <div class="export-icon blue">
+              <svg width="48" height="48" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <h3>Exportar Renovações</h3>
+            <p>Faça download das renovações em um período</p>
+            <form id="form-export-ren" class="export-form-card">
+              <label>
+                De:
+                <input type="date" name="data_inicio" required />
+              </label>
+              <label>
+                Até:
+                <input type="date" name="data_fim" required />
+              </label>
+              <button type="submit" class="btn-export">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+                Exportar Excel
+              </button>
+            </form>
+          </div>
+
+          <div class="export-card">
+            <div class="export-icon green">
+              <svg width="48" height="48" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <h3>Exportar Novos Contratos</h3>
+            <p>Faça download dos novos contratos em um período</p>
+            <form id="form-export-novos" class="export-form-card">
+              <label>
+                De:
+                <input type="date" name="data_inicio" required />
+              </label>
+              <label>
+                Até:
+                <input type="date" name="data_fim" required />
+              </label>
+              <button type="submit" class="btn-export">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a
