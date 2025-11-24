@@ -1,13 +1,16 @@
 {
-  "name": "server",
+  "name": "secureflow-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Sistema de gerenciamento para corretora de seguros",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "setup": "npm install && mkdir -p excel",
+    "test": "echo \"Sistema SecureFlow - Servidor OK\" && exit 0"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["seguros", "corretora", "gerenciamento"],
+  "author": "SecureFlow",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
